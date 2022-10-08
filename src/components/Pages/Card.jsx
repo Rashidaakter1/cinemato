@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const Card = ({ movie }) => {
   return (
-    <div className="">
-      <div className="card shadow-xl">
+    <div className=" p-3">
+      <div className="card  shadow-3xl">
         <figure className="px-10 pt-10">
           <img
             src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
@@ -20,6 +21,9 @@ export const Card = ({ movie }) => {
           >
             Watch
           </label>
+          <Link className="btn btn-primary" to={`/singleMovie/${movie.id}`}>
+            More Details
+          </Link>
         </div>
       </div>
       <div className="text-black">
