@@ -1,20 +1,33 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 export const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const { user, signUp } = UserAuth();
+
   const navigate = useNavigate();
+
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+
+  if (error) {
+    return (
+      <div>
+        <p>Error: {error.message}</p>
+      </div>
+    );
+  }
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+  if (user) {
+    navigate("/");
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // try {
-    //   await signUp(email, password);
-    //   navigate("/");
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    createUserWithEmailAndPassword(email, password);
   };
   return (
     <div>

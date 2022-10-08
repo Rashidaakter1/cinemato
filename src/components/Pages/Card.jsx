@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { AiFillHome } from 'react-icons/ai';
 
 export const Card = ({ movie }) => {
   return (
@@ -40,8 +41,8 @@ export const Card = ({ movie }) => {
             <h3 className="font-bold text-lg">{movie.title}</h3>
             <p className="py-4 text-justify">{movie.overview}</p>
             <div className="modal-action">
-              <label htmlFor="my-modal-6" className="btn">
-                cross
+              <label htmlFor="my-modal-6" className="btn btn-ghost">
+                Back  to <span className="text-xl -mt-3 p-2"><AiFillHome/></span>
               </label>
             </div>
           </div>

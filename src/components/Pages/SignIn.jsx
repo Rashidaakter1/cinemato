@@ -1,21 +1,34 @@
 import React, { useState } from "react";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
+import auth from "../../firebase.init";
 
 export const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const { user, signUp } = UserAuth();
   const navigate = useNavigate();
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+
+  if (error) {
+    return (
+      <div>
+        <p>Error: {error.message}</p>
+      </div>
+    );
+  }
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+  if (user) {
+    navigate('/')
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email,password)
-    // try {
-    //   await signUp(email, password);
-    //   navigate("/");
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    console.log(email, password);
+    signInWithEmailAndPassword(email, password);
   };
   return (
     <div>
@@ -34,7 +47,7 @@ export const SignIn = () => {
             <h1 className="text-3xl lg:text-white text-black font-bold">
               Sign In
             </h1>{" "}
-            <form onSubmit={handleSubmit} className="w-full flex flex-col py-4">
+            <form autoComplete="off" onSubmit={handleSubmit} className="w-full flex flex-col py-4">
               {" "}
               <input
                 onChange={(e) => setEmail(e.target.value)}
