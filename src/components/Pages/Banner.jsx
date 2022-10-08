@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Card } from "./Card";
+import { Loading } from "./Loading";
 
 export const Banner = () => {
   const [movies, setMovies] = useState([]);
@@ -49,18 +50,26 @@ export const Banner = () => {
           </select>
         </label>
       </div>
-      <div>
-        <h2 className="text-white text-left lg:mx-12 mx-4 lg:font-bold font-medium lg:text-4xl text-2xl capitalize  border-red-600 border-l-8 p-2">popular Movies </h2>
+      <div className="">
+        <h2 className="text-white text-left lg:mx-12 mx-4 lg:font-bold font-medium lg:text-4xl text-2xl capitalize  border-red-600 border-l-8 p-2">
+          popular Movies{" "}
+        </h2>
+
         <div className="text-white grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-x-5 gap-y-5">
-          {movies
-            .filter(
-              (movie) =>
-                movie.release_date.slice(0, 4).includes(queryYear) &&
-                movie.original_title.toLowerCase().includes(query)
-            )
-            .map((movie) => (
-              <Card key={movie.id} movie={movie}></Card>
-            ))}
+          {movies.length > 0 ? (
+            movies
+              .filter(
+                (movie) =>
+                  movie.release_date.slice(0, 4).includes(queryYear) &&
+                  movie.original_title.toLowerCase().includes(query)
+              )
+              .map((movie) => <Card key={movie.id} movie={movie}></Card>)
+          ) : (
+            <div className="col-span-3 h-screen">
+              <Loading />
+            </div>
+          )}
+          <div>{movies.length < 0 && <p className="border">not found</p>}</div>
         </div>
       </div>
       {/* <img src="https://cinerama.qodeinteractive.com/wp-content/uploads/2018/05/landing-slider-img.png" alt="banner" />
