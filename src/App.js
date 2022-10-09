@@ -10,7 +10,7 @@ function App() {
       <header>
         <Navbar />
       </header>
-      <main>
+      <main className="h-[100vh]">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="home" element={<Home />} />

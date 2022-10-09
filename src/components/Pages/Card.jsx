@@ -4,8 +4,8 @@ import { AiFillHome } from "react-icons/ai";
 
 export const Card = ({ movie }) => {
   return (
-    <div className=" p-3">
-      <div className="card  shadow-3xl">
+    <div className="bg-black p-3">
+      <div className="card ">
         <figure className="px-10 pt-10">
           <img
             src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
